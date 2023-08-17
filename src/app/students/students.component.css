@@ -1,4 +1,11 @@
 table {
-    width: 100%;
-    background-color: rgb(173, 230, 230);
+ 
+ 
+  }
+
+  .edit{
+
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
   }

@@ -1,41 +1,71 @@
-<strong><h1>STUDENTS PROFILE</h1></strong>
+<div>
+  <table>
+    <tr>
+      <th></th>
+      <th>StudentId</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>AdmissionNumber</th>
+      <th>Form</th>
+    </tr>
 
-<table mat-table [dataSource]="students" class="mat-elevation-z8">
+    <!-- Loop through students -->
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    
-    <ng-container matColumnDef="studentId">
-      <th mat-header-cell *matHeaderCellDef> Id. </th>
-      <td mat-cell *matCellDef="let element"> <a [routerLink] ="['/marks',element.studentId]">{{element.studentId}}</a> </td>
-    </ng-container>
-  
-   
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> FirstName</th>
-      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
-  
-    
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> lastName </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="admissionNumber">
-      <th mat-header-cell *matHeaderCellDef>AdmissionNumber </th>
-      <td mat-cell *matCellDef="let element"> {{element.admissionNumber}} </td>
-    </ng-container>
-    
-    <ng-container matColumnDef="form">
-      <th mat-header-cell *matHeaderCellDef>Form </th>
-      <td mat-cell *matCellDef="let element"> {{element.form}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr *ngFor="let student of students">
+      <td>
+        <form action="">
+          <input type="checkbox" [checked]="isChecked" (change)="selectStudents(student,$event)">
+        </form>
+      </td>
+      <td><a [routerLink]="''" (click)="navigateToDetails(student)">{{student.studentId}}</a></td>
+      <td>{{student.firstName}}</td>
+      <td>{{student.lastName}}</td>
+      <td>{{student.admissionNumber}}</td>
+      <td>{{student.form}}</td>
+    </tr>
   </table>
+</div>
 
- 
-  <!-- <app-add-student></app-add-student> -->
+<div class="edit">
+  <!-- Add Student section -->
+  <button [disabled]="isSelectedStudent" (click)="addStudent()">Add Student</button> <br><br>
+  <div *ngIf="isClicked">
+    <!-- Input fields for adding a student -->
+    FirstName: <input type="text" [(ngModel)]="firstname"><br><br>
+    LastName: <input type="text" [(ngModel)]="lastname"><br><br>
+    Admission: <input type="text" [(ngModel)]="admission"><br><br>
+    Form: <input type="text" [(ngModel)]="form"><br>
+    <button (click)="_addStudent()" color="blue">Add</button><br><br>
+    <!-- <div>
+      <button (click)="doneAddingStudent()">Done</button>
+    </div> -->
+  </div>
+
+  <div class="">
+    <!-- Edit Student section -->
+    <button [disabled]="!isSelectedStudent||isDeleting" (click)="editStudent()">Edit Student</button> <br><br>
+    <div *ngIf="isEditting">
+      FirstName: <input type="text" [(ngModel)]="selectedStudent.firstName"><br><br>
+      LastName: <input type="text" [(ngModel)]="selectedStudent.lastName"><br><br>
+      Admission: <input type="text" [(ngModel)]="selectedStudent.admissionNumber"><br><br>
+      Form: <input type="text" [(ngModel)]="selectedStudent.form"><br>
+      <button (click)="_editStudent()" color="blue">Edit</button><br><br>
+      <!-- <div>
+        <button (click)="doneEdittingStudent()">Done</button>
+      </div> -->
+    </div>
+
+
+    <div>
+      <button [disabled]="!isSelectedStudent" (click)="deleteSelectedStudents()">deleteStudent(s)</button>
+
+    </div>
+
+    <!-- Notification  section -->
+    <div>
+      <h1> {{notification}}</h1>
+    </div>
+
+
+  </div>
+</div>

@@ -1,7 +1,8 @@
 <h1><strong>STUDENT'S REPORT</strong></h1>
-  <div>
+  <div >
+ 
    
-    <p>Students Name: <STRong>{{studentMarks.studentId.firstName}} </STRong> <STRong>{{studentMarks.studentId.lastName}} </STRong></p>
+    <p>Students Name: <STRong>{{student.firstName}} </STRong> <STRong>{{student.lastName}} </STRong></p>
     <p>Marks ID: {{ studentMarks.marksId }}</p>
     <p>Maths: {{ studentMarks.maths }}</p>
     <p>English: {{ studentMarks.english }}</p>
@@ -9,7 +10,65 @@
     <p>Average: {{ studentMarks.average }}</p>
     <p>Grade: {{ studentMarks.grade}}</p>
   </div>
+
+
+  <button type="button" (click)="addingMarks()">Add Marks</button> <br><br>
   
+  <div *ngIf="clicked">
+    
+      <label for="marksId">Enter MarksId</label>
+      <input id="marksId" type="number" [(ngModel)]="id"> <br> 
+  
+      <label for="mathsScore">Enter Maths-score</label>
+      <input id="mathsScore" type="number" placeholder="maths" [(ngModel)]="maths"><br>
+  
+      <label for="englishScore">Enter English-score</label> 
+      <input id="englishScore" type="number" [(ngModel)]="english"> <br>
+  
+      <label for="chemistryScore">Enter Chemistry-score</label>
+      <input id="chemistryScore" type="number" [(ngModel)]="chemistry"><br>
+  
+      <label for="studentId">Enter studentId</label>
+      <input id="studentId" type="number" [(ngModel)]="student.studentId"> <br>
 
+      <button type="button" (click)="addMarks()">Add</button> <br>
+      <button (click)="doneAdding()" >done</button> <br> <br>
+    
+  </div> 
 
+  <button (click)="edittingMarks()">EditMarks</button> <br> <br>
+
+  <div *ngIf="isEditting">
+   
+    <div>
+      <label for="marksId">Marks ID:</label>
+      <input type="number" [(ngModel)]="marks.marksId">
+    </div>
+    
+    <div>
+      <label for="chemistry">Chemistry:</label>
+      <input type="number" [(ngModel)]="marks.chemistry">
+    </div>
+    
+    <div>
+      <label for="english">English:</label>
+      <input type="number"  [(ngModel)]="marks.english">
+    </div>
+    
+    <div>
+      <label for="maths">Maths:</label>
+      <input type="number" [(ngModel)]="marks.maths">
+    </div>
+    
+    <button (click)="updateMarks()">Edit</button><br>
+    <button (click)="doneEditting()">Done</button>
+  
+  </div>
+ 
+   
+  <button (click)="deletingmarks()" >DeleteMarks</button>
+  <div>
+   <H2>{{notification}}</H2>
+  </div>
+  
   

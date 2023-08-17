@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StudentMarksProfileComponent } from './student-marks-profile.component';
-import { AddMarksComponent } from '../add-marks/add-marks.component';
+
 
 const routes: Routes = [
 
